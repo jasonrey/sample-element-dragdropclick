@@ -44,6 +44,16 @@ task "phpbuild",
         invoke "compilecss"
         invoke "compileHTML"
 
+task "phpbeautybuild",
+    "PHP build beautifully.",
+    ->
+        invoke "copyLibraries"
+        invoke "copyLibraries"
+        invoke "copyImages"
+        invoke "compilebeautyjs"
+        invoke "compilebeautycss"
+        invoke "compileHTML"
+
 task "prepareFolders",
     "Creates the necessary folders for further process.",
     ->
@@ -76,6 +86,15 @@ task "compilejs",
             for file in fs.readdirSync "#{pwd}/assets/js"
                 exec "uglifyjs --unsafe --output #{pwd}/public/js/#{file} #{pwd}/assets/js/#{file}"
 
+task "compilebeautyjs",
+    "Compiles coffeescript to javascript.",
+    ->
+        invoke "prepareFolders"
+
+        fs.mkdirSync "#{pwd}/public/js" unless fs.existsSync "#{pwd}/public/js"
+
+        exec "coffee --compile --bare --output #{pwd}/public/js #{pwd}/assets/coffee"
+
 task "compilecss",
     "Compiles less to css.",
     ->
@@ -83,6 +102,14 @@ task "compilecss",
         for file in fs.readdirSync "#{pwd}/assets/less"
             filename = file.slice 0, -5
             exec "lessc -x #{pwd}/assets/less/#{file} > #{pwd}/public/css/#{filename}.css"
+
+task "compilebeautycss",
+    "Compiles less to css beautifully.",
+    ->
+        invoke "prepareFolders"
+        for file in fs.readdirSync "#{pwd}/assets/less"
+            filename = file.slice 0, -5
+            exec "lessc #{pwd}/assets/less/#{file} > #{pwd}/public/css/#{filename}.css"
 
 task "compileHTML",
     "Compiles jade to html.",
