@@ -16,6 +16,7 @@ libraries =
         "less/dist/less.min.js"
         "jquery/dist/jquery.min.js"
         "coffee-script/extras/coffee-script.js"
+        "jqueryui/jquery-ui.min.js"
     ]
     "css": [
         "bootstrap/dist/css/bootstrap.min.css"
