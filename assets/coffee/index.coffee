@@ -4,8 +4,14 @@ $ ->
     dropsFrame = $ ".drops"
     choicesFrame = $ ".choices"
 
-    drops = $ ".drop"
     choices = $ ".choice"
+    drops = $ ".drop"
+
+    # choices.draggable(
+    #     revert: "invalid"
+    # )
+    # drops.droppable()
+    # choicesFrame.droppable()
 
     choices.on "click", (event) ->
         # Because parent has click event of its own, we do not want choices click to propagate up
@@ -36,7 +42,7 @@ $ ->
         activeChoice.trigger "dropping"
         frame.trigger "receiving", [activeChoice]
 
-    choices.on "dropping", ->
+    $body.on "dropping", ".choice", ->
         choice = $ @
 
         choice.removeClass "active"
@@ -51,10 +57,27 @@ $ ->
 
         choiceParent = choice.parent()
 
-        if choiceParent.hasClass "drop"
-            choiceParent.append childChoice
-        else
-            choicesFrame.trigger "receiving", [childChoice]
+        # If the drop frame already have a child, then we need to switch
+        if childChoice.length > 0
+            if choiceParent.hasClass "drop"
+                # Coming from other drop
+                choiceParent.append childChoice
+            else
+                # Coming from choice
+                choicesFrame.trigger "receiving", [childChoice]
+
+                order = childChoice.data "order"
+
+                choicesFrame
+                    .find ".choice.psuedo[data-order=" + order + "]"
+                    .remove()
+
+        # If the choice is coming from choices, then we need to create a psuedo choice
+        if choiceParent.hasClass "choices"
+            psuedoChoice = choice.clone()
+            psuedoChoice.addClass "psuedo"
+
+            choicesFrame.trigger "receiving", [psuedoChoice]
 
         frame.append choice
 
@@ -62,6 +85,14 @@ $ ->
         frame = $ @
 
         frame.append choice
+
+        # Remove the psuedo choice if the appending choice is not a psuedo
+        if !choice.hasClass "psuedo"
+            order = choice.data "order"
+
+            frame
+                .find ".choice.psuedo[data-order=" + order + "]"
+                .remove()
 
         frame
             .find ".choice"
@@ -83,3 +114,11 @@ $ ->
     choicesFrame.on "mouseout", ->
         frame = $ @
         frame.removeClass "hover"
+
+    drops.on "mouseover", ->
+        drop = $ @
+        drop.addClass "hover"
+
+    drops.on "mouseout", ->
+        drop = $ @
+        drop.removeClass "hover"
