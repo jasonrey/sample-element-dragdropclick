@@ -32,3 +32,7 @@ bower_components
 
 # Public folder
 public
+
+# Static assets
+assets/js
+assets/css
