@@ -7,8 +7,6 @@ publicFolders = [
     "public"
     "public/js"
     "public/css"
-    "public/less"
-    "public/coffee"
 ]
 
 libraries =
@@ -16,7 +14,6 @@ libraries =
         "less/dist/less.min.js"
         "jquery/dist/jquery.min.js"
         "coffee-script/extras/coffee-script.js"
-        "jqueryui/jquery-ui.min.js"
     ]
     "css": [
         "bootstrap/dist/css/bootstrap.min.css"
@@ -25,7 +22,7 @@ libraries =
 task "development",
     "Development build.",
     ->
-        invoke "copyLibraries"
+        invoke "copyDevLibraries"
 
 task "production",
     "Production build.",
@@ -39,7 +36,6 @@ task "phpbuild",
     "PHP build.",
     ->
         invoke "copyLibraries"
-        invoke "copyLibraries"
         invoke "copyImages"
         invoke "compilejs"
         invoke "compilecss"
@@ -48,7 +44,6 @@ task "phpbuild",
 task "phpbeautybuild",
     "PHP build beautifully.",
     ->
-        invoke "copyLibraries"
         invoke "copyLibraries"
         invoke "copyImages"
         invoke "compilebeautyjs"
@@ -69,6 +64,15 @@ task "copyLibraries",
         for type, files of libraries
             for file in files
                 exec "cp -f #{pwd}/bower_components/#{file} #{pwd}/public/#{type}"
+
+task "copyDevLibraries",
+    "Copy static libraries to assets folder.",
+    ->
+        for type, files of libraries
+            fs.mkdirSync "#{pwd}/assets/#{type}" unless fs.existsSync "#{pwd}/assets/#{type}"
+
+            for file in files
+                exec "cp -f #{pwd}/bower_components/#{file} #{pwd}/assets/#{type}"
 
 task "copyImages",
     "Copy images to public folder.",
