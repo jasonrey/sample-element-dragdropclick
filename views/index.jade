@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        title= title
+        title Element DragDrop with Click
         link(rel="stylesheet", href="css/bootstrap.min.css")
         script(type="text/javascript", src="js/jquery.min.js")
         script(type="text/javascript", src="js/jquery-ui.min.js")
@@ -12,16 +12,35 @@ html
         script(type="text/javascript", src="js/less.min.js")
         script(type="text/javascript", src="js/coffee-script.js")
     body
-        h2 Drops
-        .drops
-            .drop
-            .drop
-            .drop
-            .drop
+        .container
+            .jumbotron
+                h1.title Element DragDrop with Click
+                p
+                    ol
+                        li Due to mobile compatibility, the method used is click/touch.
 
-        h2 Choices
-        .choices
-            .choice(data-order="1") Choice A
-            .choice(data-order="2") Choice B
-            .choice(data-order="3") Choice C
-            .choice(data-order="4") Choice D
+        .container
+            .panel.panel-primary
+                .panel-heading
+                    h2 Mechanics
+                .panel-body
+                    h3 Drops
+                    .drops
+                        .drop
+                        .drop
+                        .drop
+                        .drop
+
+                    h3 Choices
+                    .choices
+                        .choice(data-order="1") Choice A
+                        .choice(data-order="2") Choice B
+                        .choice(data-order="3") Choice C
+                        .choice(data-order="4") Choice D
+
+        .container
+            .panel.panel-default
+                .panel-heading
+                    h2 API
+                .panel-body
+                    p To be updated
