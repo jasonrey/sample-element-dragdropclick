@@ -1,15 +1,19 @@
 body {
     padding-top: 50px;
 
+    h1.title {
+        font-size: 48px;
+    }
+
     .receiving {
         cursor: pointer;
 
-        border-color: #66512c;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #c0a16b;
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #c0a16b;
+        border-color: #2b542c;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168;
 
         &.hover {
-            background-color: #eee;
+            background-color: #dff0d8;
         }
     }
 
@@ -30,15 +34,28 @@ body {
         cursor: pointer;
         background-color: #fff;
 
-        &.active {
+        &:hover {
             color: #fff;
             background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        &.active {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
         }
 
         &.psuedo {
             border-style: dotted;
             color: #999;
             cursor: no-drop;
+
+            &:hover {
+                border-color: #ccc;
+                background-color: #fff;
+                color: #999;
+            }
         }
     }
 
