@@ -40,6 +40,8 @@ task "phpbuild",
         invoke "compilejs"
         invoke "compilecss"
         invoke "compileHTML"
+        invoke "copyExternalLibraries"
+        invoke "copyAPI"
 
 task "phpbeautybuild",
     "PHP build beautifully.",
@@ -49,6 +51,8 @@ task "phpbeautybuild",
         invoke "compilebeautyjs"
         invoke "compilebeautycss"
         invoke "compileHTML"
+        invoke "copyExternalLibraries"
+        invoke "copyAPI"
 
 task "prepareFolders",
     "Creates the necessary folders for further process.",
@@ -137,3 +141,23 @@ task "compileHTML",
             content = content.replace /script\(type="text\/coffeescript", src="coffee\/(.*)\.coffee"\)/, 'script(type="text/javascript", src="js/$1.js")'
 
             fs.writeFileSync "#{pwd}/public/" + filename + ".html", jade.render(content, options), encoding: "utf8"
+
+task "copyAPI",
+    "Copies additional API files.",
+    ->
+        invoke "prepareFolders"
+        exec "cp #{pwd}/assets/api/* #{pwd}/public/api/" if fs.existsSync "#{pwd}/assets/api"
+
+task "copyExternalLibraries",
+    "Copies external libraries to assets and public folder."
+    ->
+        invoke "prepareFolders"
+
+        if fs.existsSync "#{pwd}/external_components"
+            for folder in fs.readdirSync "#{pwd}/external_components"
+                for type in fs.readdirSync "#{pwd}/external_components/#{folder}"
+                    fs.mkdirSync "#{pwd}/public/#{type}" unless fs.existsSync "#{pwd}/public/#{type}"
+                    fs.mkdirSync "#{pwd}/assets/#{type}" unless fs.existsSync "#{pwd}/assets/#{type}"
+
+                    exec "cp #{pwd}/external_components/#{folder}/#{type}/* #{pwd}/public/#{type}/"
+                    exec "cp #{pwd}/external_components/#{folder}/#{type}/* #{pwd}/"
