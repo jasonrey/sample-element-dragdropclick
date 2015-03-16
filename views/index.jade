@@ -6,6 +6,9 @@ html
         script(type="text/javascript", src="js/jquery.min.js")
         script(type="text/javascript", src="js/jquery-ui.min.js")
 
+        link(rel="stylesheet", href="css/feedback.css")
+        script(type="text/javascript", src="js/feedback.js")
+
         script(type="text/coffeescript", src="coffee/index.coffee")
         link(rel="stylesheet/less", type="text/css", href="less/index.less")
 
@@ -44,3 +47,9 @@ html
                     h2 API
                 .panel-body
                     p To be updated
+
+        .container
+            .panel.panel-warning
+                .panel-heading
+                    h2 To Do
+                .panel-body#feedback(data-identifier="element-dragdropclick")

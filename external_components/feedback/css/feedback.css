@@ -1,0 +1,78 @@
+body .container .jumbotron {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+body .container .jumbotron h1.title {
+  font-size: 48px;
+}
+body #feedback > .lineblock {
+  display: none;
+}
+body #feedback ol {
+  display: none;
+  padding-left: 0;
+  list-style-position: inside;
+}
+body #feedback ol li {
+  padding: 15px;
+}
+body #feedback ol li .actions {
+  float: right;
+}
+body #feedback ol li:hover {
+  background-color: #f5f5f5;
+}
+body #feedback ol li .name {
+  font-weight: bold;
+  float: right;
+  margin-right: 10px;
+}
+body #feedback ol li .uncomplete {
+  display: none;
+}
+body #feedback ol li.completed {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+body #feedback ol li.completed .complete {
+  display: none;
+}
+body #feedback ol li.completed .uncomplete {
+  display: inline-block;
+}
+body #feedback > form {
+  display: none;
+  border-top: 1px solid #eee;
+  position: relative;
+}
+body #feedback > form .wait {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+body #feedback > form .wait > span {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  line-height: 50px;
+  margin-top: -25px;
+  padding: 0 20px;
+  font-size: 24px;
+}
+body #feedback > form.submitting .wait {
+  display: block;
+}
+body #feedback.loaded .loading {
+  display: none;
+}
+body #feedback.loaded ol {
+  display: block;
+}
+body #feedback.loaded ol .lineblock {
+  display: list-item;
+}
+body #feedback.loaded > form {
+  display: block;
+}
