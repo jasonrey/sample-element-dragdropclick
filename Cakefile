@@ -160,4 +160,4 @@ task "copyExternalLibraries",
                     fs.mkdirSync "#{pwd}/assets/#{type}" unless fs.existsSync "#{pwd}/assets/#{type}"
 
                     exec "cp #{pwd}/external_components/#{folder}/#{type}/* #{pwd}/public/#{type}/"
-                    exec "cp #{pwd}/external_components/#{folder}/#{type}/* #{pwd}/"
+                    exec "cp #{pwd}/external_components/#{folder}/#{type}/* #{pwd}/assets/#{type}/"
