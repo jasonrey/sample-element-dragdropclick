@@ -22,33 +22,217 @@ html
                     ol
                         li Due to mobile compatibility, the method used is click/touch.
 
-        .container
             .panel.panel-primary
                 .panel-heading
                     h2 Mechanics
-                .panel-body
+                .panel-body.item(data-type="drop", data-id="1")
                     h3 Drops
-                    .drops
-                        .drop
-                        .drop
-                        .drop
-                        .drop
+                    .question
+                        .drop(data-dropid="1")
+                        .drop(data-dropid="2")
+                        .drop(data-dropid="3")
+                        .drop(data-dropid="4")
 
                     h3 Choices
                     .choices
-                        .choice(data-order="1") Choice A
-                        .choice(data-order="2") Choice B
-                        .choice(data-order="3") Choice C
-                        .choice(data-order="4") Choice D
+                        .choice(data-order="1", data-choiceid="1") Choice A
+                        .choice(data-order="2", data-choiceid="2") Choice B
+                        .choice(data-order="3", data-choiceid="3") Choice C
+                        .choice(data-order="4", data-choiceid="4") Choice D
 
-        .container
+                    .actions.text-right
+                        .btn.btn-default.check Check Answer
+
             .panel.panel-default
                 .panel-heading
-                    h2 API
+                    h2 HTML Block
                 .panel-body
-                    p To be updated
+                    pre
+                        = "<div "
+                        strong= 'data-type="drop"'
+                        = " "
+                        strong= 'data-id="(id)"'
+                        = ">"
+                        br
+                        = "    <div "
+                        strong= 'class="question"'
+                        = ">"
+                        br
+                        = "    "
+                        strong= "(question-start)"
+                        br
+                        = "        <div "
+                        strong= 'class="drop"'
+                        = " "
+                        strong= 'data-dropid="(dropid)"'
+                        = "></div>"
+                        br
+                        = "    "
+                        strong= "(question-end)"
+                        br
+                        = "    </div>"
+                        br
+                        = "    <div "
+                        strong= 'class="choices"'
+                        = ">"
+                        br
+                        = "    "
+                        strong= "(loop-start)"
+                        br
+                        = "        <div "
+                        strong= 'class="choice"'
+                        = " "
+                        strong= 'data-order="(order)"'
+                        = " "
+                        strong= 'data-choiceid="(choiceid)"'
+                        = ">"
+                        br
+                        = "            "
+                        strong= "(value)"
+                        br
+                        = "        </div>"
+                        br
+                        = "    "
+                        strong= "(loop-end)"
+                        br
+                        = "    </div>"
+                        br
+                        = '    <button|a '
+                        strong= 'class="check"'
+                        = ">Check Answer</button|a>"
+                        br
+                        = "</div>"
 
-        .container
+            .panel.panel-default
+                .panel-heading
+                    h2 CSS Classes
+                .panel-body
+                    h3
+                        = "Question Block "
+                        code= ".question"
+                    pre= '<div class="question"></div>'
+
+                    h3
+                        = "Drop "
+                        code= ".question .drop"
+                    pre= '<div class="drop"></div>'
+
+                    h3
+                        = "Drop - Receiving "
+                        code= ".question .drop.receiving"
+                    pre= '<div class="drop receiving"></div>'
+
+                    h3
+                        = "Drop - Receiving & Hover "
+                        code= ".question .drop.receiving.hover"
+                    .alert.alert-warning Hover is controlled through JS by adding .hover instead of CSS :hover because "receiving" checking is imposed.
+                    pre= '<div class="drop receiving hover"></div>'
+
+                    h3
+                        = "Drop - Correct "
+                        code= ".question .drop.correct"
+                    pre= '<div class="drop correct"></div>'
+
+                    h3
+                        = "Drop - Wrong "
+                        code= ".question .drop.wrong"
+                    pre= '<div class="drop wrong"></div>'
+
+                    h3
+                        = "Choices Block "
+                        code= ".choices"
+                    pre= '<div class="choices"></div>'
+
+                    h3
+                        = "Choices Block - Receiving "
+                        code= ".choices.receiving"
+                    pre= '<div class="choices receiving"></div>'
+
+                    h3
+                        = "Choices Block - Receiving & Hover "
+                        code= ".choices.receiving.hover"
+                    .alert.alert-warning Hover is controlled through JS by adding .hover instead of CSS :hover because "receiving" checking is imposed.
+                    pre= '<div class="choices receiving hover"></div>'
+
+                    h3
+                        = "Choice "
+                        code= ".choices .choice"
+                    pre= '<div class="choice"></div>'
+
+                    h3
+                        = "Choice - Selected "
+                        code= ".choices .choice.selected"
+                    pre= '<div class="choice selected"></div>'
+
+                    h3
+                        = "Choice (Dropped) "
+                        code= ".question .drop .choice"
+                    pre= '<div class="choice"></div>'
+
+                    h3
+                        = "Choice (Dropped) - Selected "
+                        code= ".question .drop .choice.selected"
+                    pre= '<div class="choice selected"></div>'
+
+                    h3
+                        = "Choice - Psuedo "
+                        code= ".choices .choice.psuedo"
+                    pre= '<div class="choice psuedo"></div>'
+
+                    h3
+                        = "Check Answer "
+                        code= ".check"
+                    pre= '<button|a class="check">Check Answer</button|a>'
+
+            .panel.panel-default
+                .panel-heading
+                    h2 Question Input
+                .panel-body
+                    pre
+                        = "<div "
+                        strong= 'class="drop"'
+                        = " "
+                        strong= 'data-dropid="(dropid)"'
+                        = "></div>"
+
+            .panel.panel-default
+                .panel-heading
+                    h2 Answers Database
+                .panel-body
+                    table.table.table-striped.table-condensed
+                        thead
+                            tr
+                                th id
+                                th questionid
+                                th dropid
+                                th choiceid
+                                th value
+                        tbody
+                            tr
+                                td 1
+                                td 1
+                                td 1
+                                td 2
+                                td Choice B
+                            tr
+                                td 2
+                                td 1
+                                td 2
+                                td 4
+                                td Choice D
+                            tr
+                                td 3
+                                td 1
+                                td 3
+                                td 3
+                                td Choice C
+                            tr
+                                td 4
+                                td 1
+                                td 4
+                                td 1
+                                td Choice A
+
             .panel.panel-warning
                 .panel-heading
                     h2 To Do
